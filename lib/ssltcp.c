@@ -33,8 +33,8 @@ ssltcp_cert(SSL_CTX *ctx, const char *file, int type)
 	ret = SSL_CTX_use_certificate_file(ctx, file, type);
 	if(ret != 1) {
 		ret = ERR_get_error();
-		sys_err("SSL_CTX_use_cert failed: %s(%d)\n", 
-			ERR_error_string(ret, NULL), ret);
+		sys_err("SSL_CTX_use_cert failed: file: %s not found, %s(%d)\n", 
+			file, ERR_error_string(ret, NULL), ret);
 		exit(-1);
 	}
 }
