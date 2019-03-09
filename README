@@ -10,9 +10,22 @@ rctl 用于远程管理海量linux设备。目前功能:
 ## 使用
 
 ### 证书系统
-生成server证书：openssl genrsa -out client-key.pem 1024  
-　　创建证书请求：openssl req -new -out client-req.csr -key client-key.pem 
-　　自签署证书：openssl x509 -req -in client-req.csr -out client-cert.pem -signkey client-key.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -days 3650 
+使用相同的ca生成两个证书，一个是server.cer，一个是client-cert，注意生成server-cert的时候必须指明证书可以用于服务端的
+创建私钥：openssl genrsa -out ca-key.pem 1024
+创建证书请求：openssl req -new -out ca-req.csr -key ca-key.pem
+自签署证书：openssl x509 -req -in ca-req.csr -out ca-cert.pem -signkey ca-key.pem -days 3650
+
+生成server证书：openssl genrsa -out server-key.pem 1024
+创建证书请求：openssl req -new -out server-req.csr -key server-key.pem
+自签署证书：openssl x509 -req -in server-req.csr -out server-cert.pem -signkey server-key.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -days 3650
+
+生成client证书：openssl genrsa -out client-key.pem 1024  
+创建证书请求：openssl req -new -out client-req.csr -key client-key.pem 
+自签署证书：openssl x509 -req -in client-req.csr -out client-cert.pem -signkey client-key.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -days 3650 
+
+cp server-key.pem /etc/rctl/rctl_priv.pem
+cp server-cert.pem /etc/rctl/rctl_cert.pem
+cp ca-cert.pem /etc/ssl/certs/wirelesser_ca.crt
 
 ### 命令
 
