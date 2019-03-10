@@ -19,9 +19,10 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "rctl.h"
 #include "cmdline.h"
+#include "config.h"
 
 int debug = 0;
 struct  gengetopt_args_info args_info;
@@ -63,6 +64,9 @@ void proc_args(int argc, char *argv[])
 	if(ret != 0) exit(ret);
 
 	debug = args_info.debug_flag;
+        if(args_info.server_arg){
+		strcpy(serverip[0], args_info.server_arg);
+	}
 }
 
 int main(int argc, char *argv[])

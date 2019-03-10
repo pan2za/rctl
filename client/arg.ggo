@@ -8,3 +8,4 @@ option "wan" 		w 	"wan" string required
 option "class" 		c 	"class" string required 
 option "daemon" 	d 	"daemon mode" flag on 
 option "debug" 		b 	"debug" flag off
+option "server"         s       "server" string optional
