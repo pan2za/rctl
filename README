@@ -39,7 +39,7 @@ server:
 
 client:
 	
-	[jianxi@jianxi rctl]$ ./client/rctlcli 
+	[jianxi@jianxi rctl]$ ./client/rctlcli -c ens32 -w ens32 -d 0 -s <your-server-ip>
 	(10975) rctl.c +105 r_connect(): DEBUG: Trying 1 ......
 	(10975) rctl.c +57 r_server(): DEBUG: Try connect: 127.0.0.1
 	(10975) rctl.c +125 r_connect(): DEBUG: Try 127.0.0.1 port: 7000
@@ -51,6 +51,6 @@ client:
 	
 ### 待完成
 
-* readline bash风格接口
+* client's -s command
 * 配置文件
-* 链表基本结构优化
+* vnc,instead of ssh
